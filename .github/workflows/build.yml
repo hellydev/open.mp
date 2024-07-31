@@ -54,7 +54,7 @@ jobs:
           HEAD_REF: ${{ github.head_ref || github.ref_name }}
         run: |
           echo "build_version=$(git describe --always --tags "refs/remotes/origin/${HEAD_REF}")" >> $GITHUB_OUTPUT
-          echo "build_config=RelWithDebInfo" >> $GITHUB_OUTPUT
+          echo "build_config=Debug" >> $GITHUB_OUTPUT
           echo "build_ubuntu_version=18.04" >> $GITHUB_OUTPUT
           echo "build_shared=${{ matrix.ssl == 'dynamic' }}" >> $GITHUB_OUTPUT
           echo "build_server=1" >> $GITHUB_OUTPUT
@@ -140,4 +140,4 @@ jobs:
           cd docker
           chmod +x ./abicheck.sh
           chmod +x ./abicheck_ubuntu-18.04/docker-entrypoint.sh
-          CONFIG=RelWithDebInfo NIGHTLY_REPO="${{ github.repository }}" REF_ARCHIVE="open.mp-linux-x86-dynssl-${{ steps.vars.outputs.build_version }}.tar.xz" UBUNTU_VERSION=18.04 BUILD_SERVER=0 BUILD_TOOLS=1 ./abicheck.sh
+          CONFIG=Debug NIGHTLY_REPO="${{ github.repository }}" REF_ARCHIVE="open.mp-linux-x86-dynssl-${{ steps.vars.outputs.build_version }}.tar.xz" UBUNTU_VERSION=18.04 BUILD_SERVER=0 BUILD_TOOLS=1 ./abicheck.sh
